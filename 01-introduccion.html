@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1. Introducción | Tau de Kendall</title>
+  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {delimiters: [{left:'$$',right:'$$',display:true},{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false}]});"></script>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>2.1.3 Coeficiente de Tau de Kendall (τ)</h1>
+      <p>1. Introducción</p>
+    </div>
+  </header>
+
+  <nav>
+    <div class="container">
+      <a href="index.html">Inicio</a>
+      <a href="01-introduccion.html" class="active">1. Introducción</a>
+      <a href="02-formula-y-calculo.html">2. Fórmula</a>
+      <a href="03-interpretacion.html">3. Interpretación</a>
+      <a href="04-propiedades.html">4. Propiedades</a>
+      <a href="05-ejemplos.html">5. Ejemplos</a>
+      <a href="ejercicios/ejercicios-manuales.html">Ejercicios</a>
+    </div>
+  </nav>
+
+  <main>
+    <h2>¿Qué es el coeficiente Tau de Kendall?</h2>
+    <p>
+      El <strong>coeficiente Tau de Kendall</strong> (denotado \( \tau \)) es una medida
+      <strong>no paramétrica</strong> de la asociación entre dos variables. Se basa en contar
+      cuántos pares de observaciones son <strong>concordantes</strong> y cuántos son
+      <strong>discordantes</strong>.
+    </p>
+    <p>
+      Fue introducido por el estadístico británico <strong>Maurice Kendall</strong> en 1938.
+    </p>
+
+    <h3>Rango de valores</h3>
+    <div class="math-block">
+      $$ -1 \leq \tau \leq +1 $$
+    </div>
+    <table>
+      <thead>
+        <tr><th>Valor de \( \tau \)</th><th>Interpretación</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>\( \tau = +1 \)</td><td>Todos los pares son concordantes (asociación positiva perfecta)</td></tr>
+        <tr><td>\( \tau = -1 \)</td><td>Todos los pares son discordantes (asociación negativa perfecta)</td></tr>
+        <tr><td>\( \tau = 0 \)</td><td>No hay tendencia de concordancia ni discordancia</td></tr>
+        <tr><td>\( 0 &lt; \tau &lt; 1 \)</td><td>Más pares concordantes que discordantes</td></tr>
+        <tr><td>\( -1 &lt; \tau &lt; 0 \)</td><td>Más pares discordantes que concordantes</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Idea central: pares concordantes y discordantes</h2>
+    <p>
+      Se consideran todos los pares posibles de observaciones \( (i, j) \) con \( i &lt; j \).
+    </p>
+    <div class="card highlight">
+      <ul style="margin-bottom:0;">
+        <li><strong>Par concordante:</strong> el orden de X e Y coincide.
+          Es decir, \( (x_j - x_i) \) y \( (y_j - y_i) \) tienen el mismo signo
+          (ambos positivos o ambos negativos).</li>
+        <li><strong>Par discordante:</strong> el orden de X e Y es opuesto
+          (un signo positivo y otro negativo).</li>
+        <li><strong>Empate:</strong> \( x_i = x_j \) o \( y_i = y_j \) (se trata de forma especial según la variante de τ).</li>
+      </ul>
+    </div>
+    <p>
+      Intuitivamente, \( \tau \) responde a:
+      <em>«Si tomo dos observaciones al azar, ¿con qué probabilidad el orden en X coincide con el orden en Y,
+      menos la probabilidad de que sea el opuesto?»</em>
+    </p>
+
+    <h2>Comparación rápida con Pearson y Spearman</h2>
+    <table>
+      <thead>
+        <tr><th>Aspecto</th><th>Pearson</th><th>Spearman</th><th>Kendall</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Idea base</td><td>Covarianza de valores</td><td>Correlación de rangos</td><td>Pares concordantes/discordantes</td></tr>
+        <tr><td>Tipo de relación</td><td>Lineal</td><td>Monótona</td><td>Monótona</td></tr>
+        <tr><td>Paramétrico</td><td>Sí</td><td>No</td><td>No</td></tr>
+        <tr><td>Muestras pequeñas</td><td>—</td><td>Bien</td><td>Muy adecuado</td></tr>
+        <tr><td>Muchos empates</td><td>—</td><td>Aceptable</td><td>Preferible (τ-b)</td></tr>
+        <tr><td>Interpretación</td><td>Muy intuitiva</td><td>Intuitiva</td><td>Probabilística (muy clara)</td></tr>
+      </tbody>
+    </table>
+
+    <h2>¿Cuándo usar Kendall?</h2>
+    <ul>
+      <li>Muestras <strong>pequeñas</strong>.</li>
+      <li>Muchos <strong>empates</strong> en los datos.</li>
+      <li>Variables <strong>ordinales</strong> o rankings.</li>
+      <li>Se desea una interpretación en términos de <strong>probabilidad de concordancia</strong>.</li>
+      <li>Como alternativa robusta a Spearman en análisis exploratorio.</li>
+    </ul>
+
+    <div class="card warning">
+      <h3 style="margin-top:0;">Correlación ≠ causalidad</h3>
+      <p style="margin-bottom:0;">
+        Tau de Kendall mide asociación, no causa-efecto. Un \( \tau \) alto no implica que una variable cause a la otra.
+      </p>
+    </div>
+
+    <div class="nota">
+      <strong>Resumen:</strong> Kendall cuantifica cuánto coinciden los órdenes de dos variables
+      contando pares concordantes y discordantes. Es no paramétrico, robusto y especialmente
+      útil con muestras pequeñas o muchos empates.
+    </div>
+
+    <p style="margin-top:2rem;">
+      <a class="btn" href="02-formula-y-calculo.html">Siguiente: Fórmula y cálculo →</a>
+    </p>
+  </main>
+
+  <footer>
+    <p>Material generado para la asignatura GAD-2401 · Uso educativo</p>
+  </footer>
+</body>
+</html>

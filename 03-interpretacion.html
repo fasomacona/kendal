@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3. Interpretación | Tau de Kendall</title>
+  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {delimiters: [{left:'$$',right:'$$',display:true},{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false}]});"></script>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>2.1.3 Coeficiente de Tau de Kendall (τ)</h1>
+      <p>3. Interpretación y supuestos</p>
+    </div>
+  </header>
+
+  <nav>
+    <div class="container">
+      <a href="index.html">Inicio</a>
+      <a href="01-introduccion.html">1. Introducción</a>
+      <a href="02-formula-y-calculo.html">2. Fórmula</a>
+      <a href="03-interpretacion.html" class="active">3. Interpretación</a>
+      <a href="04-propiedades.html">4. Propiedades</a>
+      <a href="05-ejemplos.html">5. Ejemplos</a>
+      <a href="ejercicios/ejercicios-manuales.html">Ejercicios</a>
+    </div>
+  </nav>
+
+  <main>
+    <h2>Interpretación del valor de \( \tau \)</h2>
+    <p>
+      \( \tau \) se interpreta como la <strong>diferencia</strong> entre la probabilidad de que un par
+      aleatorio sea concordante y la de que sea discordante:
+    </p>
+    <div class="math-block">
+      $$ \tau \approx P(\text{concordante}) - P(\text{discordante}) $$
+    </div>
+
+    <h3>Dirección</h3>
+    <ul>
+      <li><strong>Positiva (\( \tau &gt; 0 \)):</strong> predominan los pares concordantes (orden similar).</li>
+      <li><strong>Negativa (\( \tau &lt; 0 \)):</strong> predominan los pares discordantes (orden opuesto).</li>
+      <li><strong>Cercana a cero:</strong> no hay predominio claro.</li>
+    </ul>
+
+    <h3>Fuerza (guía orientativa)</h3>
+    <table>
+      <thead>
+        <tr><th>Rango de \( |\tau| \)</th><th>Interpretación habitual</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>0.00 – 0.10</td><td>Nula o casi nula</td></tr>
+        <tr><td>0.10 – 0.30</td><td>Débil</td></tr>
+        <tr><td>0.30 – 0.50</td><td>Moderada</td></tr>
+        <tr><td>0.50 – 0.70</td><td>Fuerte</td></tr>
+        <tr><td>0.70 – 0.90</td><td>Muy fuerte</td></tr>
+        <tr><td>0.90 – 1.00</td><td>Casi perfecta / Perfecta</td></tr>
+      </tbody>
+    </table>
+    <div class="nota">
+      Los valores de \( \tau \) suelen ser <strong>numéricamente menores</strong> que los de Spearman
+      para la misma asociación (no es un error: miden cosas relacionadas pero no idénticas).
+      Compara magnitudes dentro del mismo coeficiente.
+    </div>
+
+    <h2>El valor p</h2>
+    <ul>
+      <li><strong>H₀:</strong> \( \tau = 0 \) (no hay asociación monótona)</li>
+      <li><strong>H₁:</strong> \( \tau \neq 0 \)</li>
+    </ul>
+    <div class="card highlight">
+      Si <strong>p &lt; 0.05</strong> → asociación estadísticamente significativa.<br>
+      Si <strong>p ≥ 0.05</strong> → no hay evidencia suficiente.
+    </div>
+    <p>Reporta siempre: \( \tau \), valor p y \( n \).</p>
+
+    <h2>Supuestos</h2>
+    <ol>
+      <li>Observaciones <strong>independientes</strong>.</li>
+      <li>Variables al menos <strong>ordinales</strong> (o cuantitativas).</li>
+      <li>Interés en asociación <strong>monótona</strong> (no necesariamente lineal).</li>
+    </ol>
+    <p>
+      No se exige normalidad ni homocedasticidad. Es un método no paramétrico.
+    </p>
+
+    <h2>Kendall vs Spearman en la interpretación</h2>
+    <table>
+      <thead>
+        <tr><th>Pregunta</th><th>Spearman</th><th>Kendall</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>¿Qué tan alineados están los rangos?</td><td>Más directo</td><td>—</td></tr>
+        <tr><td>¿Con qué probabilidad coinciden los órdenes?</td><td>—</td><td>Más directo</td></tr>
+        <tr><td>Muestra pequeña / muchos empates</td><td>Aceptable</td><td>Preferible</td></tr>
+        <tr><td>Valor numérico típico</td><td>Suele ser mayor</td><td>Suele ser menor</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Buenas prácticas</h2>
+    <ol>
+      <li>Visualiza siempre (scatter plot o ranking plot).</li>
+      <li>Reporta \( \tau \), p y \( n \).</li>
+      <li>Indica si usaste τ-b (con empates) — es lo habitual en software.</li>
+      <li>No compares directamente la magnitud de \( \tau \) con \( r \) o \( \rho \) sin contexto.</li>
+      <li>No afirmes causalidad.</li>
+    </ol>
+
+    <p style="margin-top:2rem;">
+      <a class="btn btn-outline" href="02-formula-y-calculo.html">← Anterior</a>
+      <a class="btn" href="04-propiedades.html">Siguiente: Propiedades →</a>
+    </p>
+  </main>
+
+  <footer>
+    <p>Material generado para la asignatura GAD-2401 · Uso educativo</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>4. Propiedades y limitaciones | Tau de Kendall</title>
+  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {delimiters: [{left:'$$',right:'$$',display:true},{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false}]});"></script>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>2.1.3 Coeficiente de Tau de Kendall (τ)</h1>
+      <p>4. Propiedades y limitaciones</p>
+    </div>
+  </header>
+
+  <nav>
+    <div class="container">
+      <a href="index.html">Inicio</a>
+      <a href="01-introduccion.html">1. Introducción</a>
+      <a href="02-formula-y-calculo.html">2. Fórmula</a>
+      <a href="03-interpretacion.html">3. Interpretación</a>
+      <a href="04-propiedades.html" class="active">4. Propiedades</a>
+      <a href="05-ejemplos.html">5. Ejemplos</a>
+      <a href="ejercicios/ejercicios-manuales.html">Ejercicios</a>
+    </div>
+  </nav>
+
+  <main>
+    <h2>Propiedades importantes</h2>
+    <ol>
+      <li><strong>Simetría:</strong> \( \tau_{xy} = \tau_{yx} \).</li>
+      <li><strong>Rango acotado:</strong> \( -1 \leq \tau \leq 1 \).</li>
+      <li><strong>Invarianza ante transformaciones monótonas:</strong> igual que Spearman, \( \tau \) no cambia si se aplica una función monótona creciente a X o a Y.</li>
+      <li><strong>Interpretación probabilística:</strong> diferencia entre P(concordante) y P(discordante).</li>
+      <li><strong>Robusto ante outliers:</strong> un valor extremo afecta solo a los pares que lo involucran, no a toda la métrica como en Pearson.</li>
+    </ol>
+
+    <h2>Fortalezas</h2>
+    <ul>
+      <li>Muy adecuado para <strong>muestras pequeñas</strong>.</li>
+      <li>Manejo natural de <strong>empates</strong> (τ-b).</li>
+      <li>Interpretación clara en términos de concordancia de órdenes.</li>
+      <li>No requiere normalidad.</li>
+      <li>Útil para <strong>rankings</strong> y variables ordinales.</li>
+    </ul>
+
+    <h2>Limitaciones</h2>
+    <div class="card warning">
+      <h3 style="margin-top:0;">1. Solo asociaciones monótonas</h3>
+      <p style="margin-bottom:0;">
+        No captura bien relaciones en forma de U u otras no monótonas. Siempre graficar.
+      </p>
+    </div>
+    <div class="card warning">
+      <h3 style="margin-top:0;">2. Costo computacional</h3>
+      <p style="margin-bottom:0;">
+        El número de pares crece como \( O(n^2) \). En muestras muy grandes Spearman suele ser más rápido
+        (aunque en la práctica el software optimiza ambos).
+      </p>
+    </div>
+    <div class="card warning">
+      <h3 style="margin-top:0;">3. Magnitud no comparable directamente con Pearson</h3>
+      <p style="margin-bottom:0;">
+        Un \( \tau = 0.5 \) no “equivale” a un \( r = 0.5 \). Interpreta cada coeficiente en su propia escala.
+      </p>
+    </div>
+    <ul>
+      <li>No implica causalidad.</li>
+      <li>Con muy pocos datos, la estimación puede ser inestable (aunque sigue siendo preferible a Pearson en ese contexto).</li>
+    </ul>
+
+    <h2>¿Cuándo elegir Kendall, Spearman o Pearson?</h2>
+    <table>
+      <thead>
+        <tr><th>Situación</th><th>Recomendación</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Relación lineal, datos normales, sin outliers</td><td>Pearson</td></tr>
+        <tr><td>Relación monótona, muestra moderada/grande</td><td>Spearman (o Kendall)</td></tr>
+        <tr><td>Muestra pequeña</td><td>Kendall</td></tr>
+        <tr><td>Muchos empates</td><td>Kendall (τ-b)</td></tr>
+        <tr><td>Rankings / variables ordinales</td><td>Kendall o Spearman</td></tr>
+        <tr><td>Interpretación probabilística deseada</td><td>Kendall</td></tr>
+        <tr><td>Outliers presentes</td><td>Kendall o Spearman</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Resumen de los tres coeficientes</h2>
+    <table>
+      <thead>
+        <tr><th>Aspecto</th><th>Pearson \( r \)</th><th>Spearman \( \rho \)</th><th>Kendall \( \tau \)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Base</td><td>Valores</td><td>Rangos</td><td>Pares C/D</td></tr>
+        <tr><td>Relación</td><td>Lineal</td><td>Monótona</td><td>Monótona</td></tr>
+        <tr><td>Paramétrico</td><td>Sí</td><td>No</td><td>No</td></tr>
+        <tr><td>Robustez</td><td>Baja</td><td>Alta</td><td>Alta</td></tr>
+        <tr><td>Muestra pequeña</td><td>Menos ideal</td><td>Bien</td><td>Excelente</td></tr>
+        <tr><td>Empates</td><td>—</td><td>Aceptable</td><td>Muy bueno</td></tr>
+      </tbody>
+    </table>
+
+    <div class="nota">
+      <strong>Conclusión:</strong> Tau de Kendall completa el conjunto de herramientas de correlación.
+      Úsalo cuando la muestra sea pequeña, haya muchos empates, trabajes con rankings o quieras
+      una lectura en términos de probabilidad de concordancia.
+    </div>
+
+    <p style="margin-top:2rem;">
+      <a class="btn btn-outline" href="03-interpretacion.html">← Anterior</a>
+      <a class="btn" href="05-ejemplos.html">Siguiente: Ejemplos →</a>
+    </p>
+  </main>
+
+  <footer>
+    <p>Material generado para la asignatura GAD-2401 · Uso educativo</p>
+  </footer>
+</body>
+</html>

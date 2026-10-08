@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2. Fórmula y cálculo | Tau de Kendall</title>
+  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {delimiters: [{left:'$$',right:'$$',display:true},{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false}]});"></script>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>2.1.3 Coeficiente de Tau de Kendall (τ)</h1>
+      <p>2. Fórmula y cálculo</p>
+    </div>
+  </header>
+
+  <nav>
+    <div class="container">
+      <a href="index.html">Inicio</a>
+      <a href="01-introduccion.html">1. Introducción</a>
+      <a href="02-formula-y-calculo.html" class="active">2. Fórmula</a>
+      <a href="03-interpretacion.html">3. Interpretación</a>
+      <a href="04-propiedades.html">4. Propiedades</a>
+      <a href="05-ejemplos.html">5. Ejemplos</a>
+      <a href="ejercicios/ejercicios-manuales.html">Ejercicios</a>
+    </div>
+  </nav>
+
+  <main>
+    <h2>Definiciones previas</h2>
+    <p>Con \( n \) observaciones, el número total de pares posibles es:</p>
+    <div class="math-block">
+      $$ \binom{n}{2} = \dfrac{n(n-1)}{2} $$
+    </div>
+    <ul>
+      <li>\( C \) = número de pares <strong>concordantes</strong></li>
+      <li>\( D \) = número de pares <strong>discordantes</strong></li>
+      <li>\( T_x \) = pares empatados solo en X</li>
+      <li>\( T_y \) = pares empatados solo en Y</li>
+    </ul>
+
+    <h2>Tau-a (sin empates)</h2>
+    <p>Cuando no hay empates:</p>
+    <div class="math-block">
+      $$ \tau_a = \dfrac{C - D}{\dfrac{n(n-1)}{2}} = \dfrac{C - D}{\binom{n}{2}} $$
+    </div>
+    <p>
+      Es la diferencia entre la proporción de pares concordantes y la de discordantes.
+    </p>
+
+    <h2>Tau-b (con empates) — la más usada</h2>
+    <p>
+      Cuando hay empates, se usa <strong>τ-b</strong> (la que implementan por defecto SciPy, R, etc.):
+    </p>
+    <div class="math-block">
+      $$ \tau_b = \dfrac{C - D}{\sqrt{(C + D + T_x)(C + D + T_y)}} $$
+    </div>
+    <p>
+      El denominador ajusta por los empates. Si no hay empates, \( \tau_b = \tau_a \).
+    </p>
+
+    <h2>Procedimiento paso a paso (cálculo manual)</h2>
+    <ol>
+      <li>Listar las \( n \) observaciones \( (x_i, y_i) \).</li>
+      <li>Para cada par \( i &lt; j \), determinar si es concordante, discordante o empate:
+        <ul>
+          <li>Concordante: \( (x_j - x_i)(y_j - y_i) &gt; 0 \)</li>
+          <li>Discordante: \( (x_j - x_i)(y_j - y_i) &lt; 0 \)</li>
+          <li>Empate: \( (x_j - x_i)(y_j - y_i) = 0 \)</li>
+        </ul>
+      </li>
+      <li>Contar \( C \) y \( D \).</li>
+      <li>Si no hay empates: \( \tau = \dfrac{C - D}{n(n-1)/2} \).</li>
+      <li>Redondear a 4 decimales e interpretar.</li>
+    </ol>
+
+    <h2>Ejemplo numérico completo (sin empates)</h2>
+    <p>Cinco observaciones:</p>
+    <table>
+      <thead>
+        <tr><th>i</th><th>\( x \)</th><th>\( y \)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>1</td><td>3</td></tr>
+        <tr><td>2</td><td>2</td><td>1</td></tr>
+        <tr><td>3</td><td>3</td><td>4</td></tr>
+        <tr><td>4</td><td>4</td><td>2</td></tr>
+        <tr><td>5</td><td>5</td><td>5</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Pares posibles (n = 5 → 10 pares)</h3>
+    <table>
+      <thead>
+        <tr><th>Par (i,j)</th><th>\( \Delta x \)</th><th>\( \Delta y \)</th><th>Tipo</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>(1,2)</td><td>+1</td><td>−2</td><td>Discordante</td></tr>
+        <tr><td>(1,3)</td><td>+2</td><td>+1</td><td>Concordante</td></tr>
+        <tr><td>(1,4)</td><td>+3</td><td>−1</td><td>Discordante</td></tr>
+        <tr><td>(1,5)</td><td>+4</td><td>+2</td><td>Concordante</td></tr>
+        <tr><td>(2,3)</td><td>+1</td><td>+3</td><td>Concordante</td></tr>
+        <tr><td>(2,4)</td><td>+2</td><td>+1</td><td>Concordante</td></tr>
+        <tr><td>(2,5)</td><td>+3</td><td>+4</td><td>Concordante</td></tr>
+        <tr><td>(3,4)</td><td>+1</td><td>−2</td><td>Discordante</td></tr>
+        <tr><td>(3,5)</td><td>+2</td><td>+1</td><td>Concordante</td></tr>
+        <tr><td>(4,5)</td><td>+1</td><td>+3</td><td>Concordante</td></tr>
+      </tbody>
+    </table>
+    <p>\( C = 7 \), \( D = 3 \), total de pares = 10.</p>
+    <div class="math-block">
+      $$ \tau = \dfrac{7 - 3}{10} = \dfrac{4}{10} = 0.4 $$
+    </div>
+    <div class="card success">
+      <strong>Resultado:</strong> \( \tau = 0.4 \)<br>
+      Asociación monótona positiva moderada: hay más pares concordantes que discordantes.
+    </div>
+
+    <h2>Ejemplo con asociación perfecta</h2>
+    <p>Si \( y \) es una función monótona creciente de \( x \) (sin empates), todos los pares son concordantes:</p>
+    <div class="math-block">
+      $$ C = \binom{n}{2},\quad D = 0 \quad \Rightarrow \quad \tau = 1 $$
+    </div>
+
+    <div class="nota">
+      <strong>Recomendaciones para el cálculo manual:</strong>
+      <ul style="margin-bottom:0;">
+        <li>Organiza una tabla de todos los pares \( i &lt; j \).</li>
+        <li>Marca C o D en cada fila y suma al final.</li>
+        <li>Verifica: \( C + D \) (+ empates) debe ser \( n(n-1)/2 \).</li>
+        <li>En software se usa normalmente τ-b (ajusta empates automáticamente).</li>
+      </ul>
+    </div>
+
+    <p style="margin-top:2rem;">
+      <a class="btn btn-outline" href="01-introduccion.html">← Anterior</a>
+      <a class="btn" href="03-interpretacion.html">Siguiente: Interpretación →</a>
+    </p>
+  </main>
+
+  <footer>
+    <p>Material generado para la asignatura GAD-2401 · Uso educativo</p>
+  </footer>
+</body>
+</html>

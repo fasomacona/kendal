@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>5. Ejemplos aplicados | Tau de Kendall</title>
+  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {delimiters: [{left:'$$',right:'$$',display:true},{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false}]});"></script>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>2.1.3 Coeficiente de Tau de Kendall (τ)</h1>
+      <p>5. Ejemplos aplicados</p>
+    </div>
+  </header>
+
+  <nav>
+    <div class="container">
+      <a href="index.html">Inicio</a>
+      <a href="01-introduccion.html">1. Introducción</a>
+      <a href="02-formula-y-calculo.html">2. Fórmula</a>
+      <a href="03-interpretacion.html">3. Interpretación</a>
+      <a href="04-propiedades.html">4. Propiedades</a>
+      <a href="05-ejemplos.html" class="active">5. Ejemplos</a>
+      <a href="ejercicios/ejercicios-manuales.html">Ejercicios</a>
+    </div>
+  </nav>
+
+  <main>
+    <h2>Ejemplo 1: Concordancia entre jueces (rankings)</h2>
+    <div class="card">
+      <p>
+        Dos jueces ordenan 8 propuestas de proyecto. Se calcula τ entre los dos rankings.
+      </p>
+      <ul>
+        <li>\( \tau = 0.71 \), \( p = 0.002 \), \( n = 8 \)</li>
+      </ul>
+      <p>
+        <strong>Interpretación:</strong> alta concordancia entre jueces. La probabilidad de que
+        coincidan en el orden relativo de dos propuestas supera claramente a la de discrepar.
+        Kendall es natural aquí por el tamaño muestral pequeño y la naturaleza de ranking.
+      </p>
+    </div>
+
+    <h2>Ejemplo 2: Educación (escalas ordinales)</h2>
+    <div class="card">
+      <p>
+        Nivel de satisfacción (1–5) vs percepción de dificultad (1–5) en un curso.
+      </p>
+      <ul>
+        <li>\( \tau = -0.38 \), \( p &lt; 0.01 \), \( n = 45 \)</li>
+      </ul>
+      <p>
+        <strong>Interpretación:</strong> asociación monótona negativa moderada: a mayor dificultad
+        percibida, menor satisfacción. Hay empates frecuentes en escalas Likert; τ-b es adecuado.
+      </p>
+    </div>
+
+    <h2>Ejemplo 3: Comparación de los tres coeficientes</h2>
+    <div class="card">
+      <p>Datos de horas de estudio y calificación (relación casi lineal, sin outliers):</p>
+      <ul>
+        <li>Pearson \( r \approx 0.99 \)</li>
+        <li>Spearman \( \rho = 1.00 \)</li>
+        <li>Kendall \( \tau = 1.00 \)</li>
+      </ul>
+      <p>
+        Cuando la asociación monótona (y lineal) es casi perfecta, los tres coinciden en el extremo.
+        En asociaciones moderadas, \( |\tau| \) suele ser menor que \( |\rho| \).
+      </p>
+    </div>
+
+    <h2>Ejemplo 4: Muestra pequeña con empates</h2>
+    <div class="card">
+      <p>
+        Seis productos evaluados en dos atributos ordinales (calidad y precio percibido), con empates.
+      </p>
+      <ul>
+        <li>Spearman \( \rho = 0.55 \)</li>
+        <li>Kendall \( \tau_b = 0.42 \)</li>
+      </ul>
+      <p>
+        <strong>Interpretación:</strong> ambos indican asociación positiva moderada. Con n pequeño
+        y empates, reportar τ-b es una buena práctica; la conclusión cualitativa es la misma.
+      </p>
+    </div>
+
+    <h2>Ejemplo 5: Marketing (orden de preferencia)</h2>
+    <div class="card success">
+      <p>
+        Ranking de preferencia de marca antes y después de una campaña (mismos 12 clientes).
+      </p>
+      <ul>
+        <li>\( \tau = 0.58 \), \( p = 0.01 \)</li>
+      </ul>
+      <p style="margin-bottom:0;">
+        <strong>Interpretación:</strong> los órdenes de preferencia antes y después están asociados
+        de forma moderada-fuerte y significativa: la campaña no “reordenó” por completo las preferencias,
+        pero tampoco las dejó iguales. Útil para evaluar estabilidad del ranking.
+      </p>
+    </div>
+
+    <h2>Cómo reportar resultados</h2>
+    <ol>
+      <li>Valor de \( \tau \) (2 o 3 decimales)</li>
+      <li>Valor p</li>
+      <li>Tamaño de muestra \( n \)</li>
+      <li>Variante usada (normalmente τ-b)</li>
+      <li>Interpretación en el contexto (incluyendo la idea de concordancia si aporta claridad)</li>
+    </ol>
+
+    <div class="card success">
+      <strong>Ejemplo de redacción correcta:</strong>
+      <p style="margin-bottom:0; font-style:italic;">
+        «El coeficiente Tau de Kendall entre los rankings de los dos docentes fue τ = 0.71
+        (p = 0.002, n = 8), lo que indica una concordancia alta y estadísticamente significativa
+        en el orden de evaluación de los proyectos.»
+      </p>
+    </div>
+
+    <p style="margin-top:2rem;">
+      <a class="btn btn-outline" href="04-propiedades.html">← Anterior</a>
+      <a class="btn" href="ejercicios/ejercicios-manuales.html">Ir a Ejercicios manuales →</a>
+    </p>
+  </main>
+
+  <footer>
+    <p>Material generado para la asignatura GAD-2401 · Uso educativo</p>
+  </footer>
+</body>
+</html>

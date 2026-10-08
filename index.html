@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2.1.3 Coeficiente de Tau de Kendall | GAD-2401</title>
+  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {delimiters: [{left:'$$',right:'$$',display:true},{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false}]});"></script>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>2.1.3 Coeficiente de Tau de Kendall (τ)</h1>
+      <p>Análisis y visualización de datos (GAD-2401) · Ingeniería Informática</p>
+    </div>
+  </header>
+
+  <nav>
+    <div class="container">
+      <a href="index.html" class="active">Inicio</a>
+      <a href="01-introduccion.html">1. Introducción</a>
+      <a href="02-formula-y-calculo.html">2. Fórmula</a>
+      <a href="03-interpretacion.html">3. Interpretación</a>
+      <a href="04-propiedades.html">4. Propiedades</a>
+      <a href="05-ejemplos.html">5. Ejemplos</a>
+      <a href="ejercicios/ejercicios-manuales.html">Ejercicios</a>
+    </div>
+  </nav>
+
+  <main>
+    <h2>Bienvenido al módulo</h2>
+    <p>
+      Este material desarrolla el <strong>Coeficiente Tau de Kendall</strong> (\( \tau \)), una medida
+      <strong>no paramétrica</strong> de asociación basada en <strong>pares concordantes y discordantes</strong>.
+      Es especialmente útil con muestras pequeñas, muchos empates o cuando se desea una interpretación
+      en términos de probabilidad de concordancia.
+    </p>
+
+    <div class="card highlight">
+      <h3 style="margin-top:0;">Objetivos de aprendizaje</h3>
+      <ol>
+        <li>Explicar qué mide Tau de Kendall y cómo se relaciona con pares concordantes/discordantes.</li>
+        <li>Calcular \( \tau \) de forma <strong>manual</strong> y con software.</li>
+        <li>Interpretar el valor de \( \tau \) y el valor p.</li>
+        <li>Comparar Kendall con Pearson y Spearman y saber cuándo preferirlo.</li>
+        <li>Aplicarlo a rankings y datos reales.</li>
+      </ol>
+    </div>
+
+    <h2>Contenido del módulo</h2>
+    <div class="grid">
+      <div class="card">
+        <h4><a href="01-introduccion.html">1. Introducción</a></h4>
+        <p>Concepto, pares concordantes/discordantes y diferencias con Pearson y Spearman.</p>
+      </div>
+      <div class="card">
+        <h4><a href="02-formula-y-calculo.html">2. Fórmula y cálculo</a></h4>
+        <p>Fórmulas de τ-a y τ-b, procedimiento paso a paso y ejemplo numérico.</p>
+      </div>
+      <div class="card">
+        <h4><a href="03-interpretacion.html">3. Interpretación y supuestos</a></h4>
+        <p>Cómo interpretar τ, valor p y supuestos.</p>
+      </div>
+      <div class="card">
+        <h4><a href="04-propiedades.html">4. Propiedades y limitaciones</a></h4>
+        <p>Propiedades, comparación con Spearman y cuándo usar cada uno.</p>
+      </div>
+      <div class="card">
+        <h4><a href="05-ejemplos.html">5. Ejemplos aplicados</a></h4>
+        <p>Casos en rankings, salud, educación y negocios.</p>
+      </div>
+      <div class="card">
+        <h4><a href="ejercicios/ejercicios-manuales.html">Ejercicios manuales</a></h4>
+        <p>Ejercicios para resolver a mano en cuaderno.</p>
+      </div>
+    </div>
+
+    <h2>Práctica en Jupyter Notebook</h2>
+    <div class="card success">
+      <p>
+        El notebook incluye cálculo de pares concordantes/discordantes, comparación con Pearson y Spearman,
+        y aplicación a datos reales.
+      </p>
+      <a class="btn" href="practica/practica_kendall.ipynb" download>Descargar practica_kendall.ipynb</a>
+      <p style="margin-top:1rem; font-size:0.9rem; color:var(--text-light);">
+        Ábrelo en <strong>Google Colab</strong>:
+        <a href="https://colab.research.google.com" target="_blank">colab.research.google.com</a>
+      </p>
+    </div>
+
+    <h2>Cómo usar este material</h2>
+    <ol>
+      <li>Lee las páginas de teoría <strong>en orden</strong> (1 → 5).</li>
+      <li>Resuelve los <strong>ejercicios manuales</strong> en tu cuaderno.</li>
+      <li>Abre el notebook y verifica tus resultados.</li>
+      <li>Completa los ejercicios adicionales del notebook.</li>
+    </ol>
+
+    <div class="nota">
+      <strong>Requisitos previos:</strong> Haber estudiado Pearson (2.1.1) y Spearman (2.1.2).
+      Conceptos de rangos y correlación.
+    </div>
+  </main>
+
+  <footer>
+    <p>Material generado para la asignatura GAD-2401 · Tecnológico de Estudios Superiores de Chalco · 2026</p>
+    <p>Uso educativo</p>
+  </footer>
+</body>
+</html>
